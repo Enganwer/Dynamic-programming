@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+ int arr[10005];
+int main(){
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+  int n , m , d,tk ;
+  cin >> n>>m >> d ;
+  long long ans = 0;
+  vector < int > vc;
+  for (int i = 0 ; i<n*m;i++)
+    cin >> tk ,  vc.push_back(tk);
+  sort(vc.begin(),vc.end());
+  int mid = (n*m)/2 ;
+  for (int i = 0 ; i < n*m ;i++){
+    if (vc[i]==vc[mid])continue;
+    if (arr[vc[i]]) {ans += arr[vc[i]]; continue;}
+    int cnt= 0 ;int num = vc[i];
+    if (i<mid ){
+    while(num<vc[mid]){
+        num += d , cnt++;
+    }
+    if (num!=vc[mid]) puts("-1"),exit(0);
+    ans+=cnt; arr[vc[i]]=cnt;
+    }else { while(num>vc[mid]){
+        num -= d , cnt++;
+    }
+    if (num!=vc[mid]) puts("-1"),exit(0);
+    ans+=cnt; arr[vc[i]]=cnt;
+    }
+ 
+  }
+  cout << ans ;
+}

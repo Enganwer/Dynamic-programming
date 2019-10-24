@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+char grid[10005][2];
+int cum[10005][2],f[10002][2];
+ 
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    int n, m, x, y ;
+    cin >> n >> m >> x >> y ;
+    for (int i = 1 ; i<= n ; i++)
+        for (int j = 1 ; j <=m ; j++)
+        {
+            cin >>grid[i][j];
+            if (grid[i][j]=='#') cum[j][0]++;
+            else cum[j][1]++;
+        }
+    for (int i = 1 ; i <= m ; i++)
+    {
+        cum[i][0]+=cum[i-1][0],cum[i][1]+=cum[i-1][1];
+        f[i][0]=10000000;
+        f[i][1]=10000000;
+    }
+    for (int i = 0 ; i < m ; i++)
+    {
+        for (int j = x ; j <= y ; j++)
+        {
+            f[i+j][0]=min(f[i+j][0],f[i][1]+cum[i+j][0]-cum[i][0]);
+            f[i+j][1]=min(f[i+j][1],f[i][0]+cum[i+j][1]-cum[i][1]);
+        }
+    }
+    cout << min (f[m][0],f[m][1]);
+}
+ 
+ 
+ 

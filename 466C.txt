@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define sf1(a)                scanf("%d", &a)
+#define sf2(a,b)              scanf("%d %d",&a, &b)
+#define sf3(a,b,c)            scanf("%d %d %d", &a, &b, &c)
+#define sf4(a,b,c,d)          scanf("%d %d %d %d", &a, &b, &c, &d)
+ 
+#define sf1ll(a)              scanf("%I64d", &a)
+#define sf2ll(a,b)            scanf("%lld %lld", &a, &b)
+#define sf3ll(a,b,c)          scanf("%I64d %I64d %I64d", &a, &b, &c)
+#define sf4ll(a,b,c,d)        scanf("%I64d %I64d %I64d %I64d", &a, &b, &c, &d)
+    map<long long, int> mp;
+const int N = 1e6+100;
+long long  arr[N],val[N],tree[N];
+int cnt [N];int n , q,l,r,tk ;
+ 
+int main()
+{long long  sum =0;
+  scanf("%d",&n);
+  for (int i=0;i<n;++i){
+      scanf("%d",&q);
+      arr[i]=q;
+      sum +=q;
+  }
+ if (sum % 3 !=0  )
+    return 0 * puts("0");sum/=3;
+  long long FF= 0;
+        for(int i = n-1; i >= 0 ; --i)
+        {
+            FF+= arr[i];
+            if (FF == sum)
+                cnt[i] = 1;
+        }
+        for(int i = n-2 ; i >= 0 ; --i)
+            cnt[i] += cnt[i+1];
+ 
+        long long ans = 0;
+        FF= 0;
+        for(int i = 0 ; i+2 < n ; ++i) {
+            FF += arr[i];
+            if (FF == sum)
+                ans += cnt[i+2];
+        }
+        cout << ans << "\n";
+ }

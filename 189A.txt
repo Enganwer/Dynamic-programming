@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+int n , a,b,c ;
+int mem[40005];
+int solve(int rem ){
+if (rem<0  ) return -1e9;
+if (rem == 0 )return 0 ;
+int &r = mem[rem];
+if (r )return r;
+return r = max(solve(rem-a)+1,max(solve(rem-b)+1,solve(rem-c)+1));
+}
+ 
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin >> n >>a >>b >>c;
+     cout << solve(n);
+ 
+}
